@@ -62,8 +62,11 @@
 
         //correct for data pipe
         const texture_cond = {
-            "0": ['NBT_53_bars/D85.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D66.png'],
-            "1": ['NBT_53_bars/D11.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D76.png', 'NBT_53_bars/D87.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D85.png', 'NBT_53_bars/D65.png', 'NBT_53_bars/D26.png']
+            "0": ['NBT_53_bars/D85.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D26.png',
+                'NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D66.png'],
+
+            "1": ['NBT_53_bars/D11.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D76.png', 'NBT_53_bars/D87.png',
+                'NBT_53_bars/D102.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D65.png', 'NBT_53_bars/D26.png']
         };
 
         const concept_cond = {
@@ -90,7 +93,16 @@
                 'NBT_53_bars/D26.png',
                 'NBT_53_bars/D77.png',
                 'NBT_53_bars/D111.png',
-                'NBT_53_bars/D96.png'
+                'NBT_53_bars/D51.png',
+                'NBT_53_bars/D66.png',
+                'NBT_53_bars/D11.png',
+                'NBT_53_bars/D17.png',
+                'NBT_53_bars/D76.png',
+                'NBT_53_bars/D87.png',
+                'NBT_53_bars/D102.png',
+                'NBT_53_bars/D57.png',
+                'NBT_53_bars/D65.png',
+                'NBT_53_bars/D26.png'
             ]
         };
         timeline.push(preload);
@@ -229,13 +241,15 @@
             return pairs; // e.g., [ [red, blue], [blue, red], ... ]
         }
 
-        //all height pairs (with replacement)
+        //all height pairs (no repeats/duplicates)
         function getHeightPairs(heights) {
             var keys = Object.keys(heights);
             var pairs = [];
             for (var i = 0; i < keys.length; i++) {
                 for (var j = 0; j < keys.length; j++) {
-                    pairs.push([keys[i], keys[j]]);
+                    if (i !== j) {
+                        pairs.push([keys[i], keys[j]]);
+                    }
                 }
             }
             return pairs;
@@ -254,14 +268,6 @@
 
         // Number of repetitions per concept
         var n_reps = 2; // you can adjust
-
-        // Build concept-side combinations for perfect balance
-        var concept_side_combos = [];
-        concept_list.forEach(concept => {
-            // Assign half to left, half to right
-            concept_side_combos.push({ concept: concept, side: "left" });
-            concept_side_combos.push({ concept: concept, side: "right" });
-        });
 
         // Shuffle the concept-side combos
         //concept_side_combos = jsPsych.randomization.shuffle(concept_side_combos);
@@ -282,7 +288,7 @@
             });
         });
         console.log(trials[0]);
-        console.log(trials.length); // Should be 216
+        console.log(trials.length); // Should be ...
         console.log(trials);
 
         var assign_trial = {
