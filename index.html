@@ -371,6 +371,15 @@
             randomize_order: true
         });
 
+        // Compute total number of assign trials added to the timeline and log it
+        let totalAssignTrials = 0;
+        for (let i = 0; i < timeline.length; i++) {
+            if (timeline[i].timeline_variables && Array.isArray(timeline[i].timeline_variables)) {
+                totalAssignTrials += timeline[i].timeline_variables.length;
+            }
+        }
+        console.log("Total assign trials in experiment:", totalAssignTrials);
+
         console.log("Participant ID:", participant_id);
         console.log("Assigned condition number:", condition_num);
         console.log("Assigned concepts:", concept_list);
