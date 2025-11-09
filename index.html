@@ -428,6 +428,7 @@
             action: "save",
             experiment_id: "rCYVwVfTK2SF",
             filename: filename,
+            message: "Please wait while the next page loads.",
             data_string: () => jsPsych.data.get().csv()
         };
         timeline.push(save_data);
@@ -435,7 +436,7 @@
         var debrief_script = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: '<div style="width:800px">Great job! You have finished the experiment.' +
-                '<p>The goal of this experiment is to investigate what factors influence people\'s associations between textures and concepts. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
+                '<p>The goal of this experiment is to investigate what factors influence the way people interpret the meanings of textures. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
                 '<p>We are interested in understanding how the textures used in the bars affect which concepts people assign to each bar.</p>' +
                 '<p>Thank you for participating! Your credit will be updated on Sona within a few days.</p>' +
                 '<p><a href="https://fic.co/submissions/complete?cc=XXXXXX">Click here to complete the experiment/p>' +
