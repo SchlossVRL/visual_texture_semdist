@@ -58,20 +58,23 @@
         let timeline = [];
 
 
-        const condition_num = await jsPsychPipe.getCondition("rCYVwVfTK2SF");
+        //const condition_num = await jsPsychPipe.getCondition("rCYVwVfTK2SF");
+
+        const condition_num = 0; //Default condition for one group
+
 
         //correct for data pipe
         const texture_cond = {
-            "0": ['NBT_53_bars/D85.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D26.png',
-                'NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D66.png'],
+            "0": ['NBT_53_bars/D48.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D47.png',
+                'NBT_53_bars/D37.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D84.png'],
 
-            "1": ['NBT_53_bars/D11.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D76.png', 'NBT_53_bars/D87.png',
-                'NBT_53_bars/D102.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D65.png', 'NBT_53_bars/D26.png']
+            "1": ['NBT_53_bars/D77.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D51.png',
+                'NBT_53_bars/D19.png', 'NBT_53_bars/D87.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D92.png']
         };
 
         const concept_cond = {
-            "0": ["bear", "fish"],
-            "1": ["celery", "mushroom"]
+            "0": ["field", "ocean"],
+            "1": ["lightning", "sandstorm"]
         };
 
         concept_list = concept_cond[condition_num];
@@ -87,22 +90,22 @@
             type: jsPsychPreload,
             images: [
                 'img/instructions_graph.png',
-                'NBT_53_bars/D85.png',
-                'NBT_53_bars/D8.png',
-                'NBT_53_bars/D25.png',
-                'NBT_53_bars/D26.png',
-                'NBT_53_bars/D77.png',
+                'NBT_53_bars/D48.png',
+                'NBT_53_bars/D46.png',
+                'NBT_53_bars/D83.png',
+                'NBT_53_bars/D47.png',
+                'NBT_53_bars/D37.png',
                 'NBT_53_bars/D111.png',
-                'NBT_53_bars/D51.png',
-                'NBT_53_bars/D66.png',
                 'NBT_53_bars/D11.png',
-                'NBT_53_bars/D17.png',
-                'NBT_53_bars/D76.png',
+                'NBT_53_bars/D84.png',
+                'NBT_53_bars/D77.png',
+                'NBT_53_bars/D4.png',
+                'NBT_53_bars/D94.png',
+                'NBT_53_bars/D51.png',
+                'NBT_53_bars/D19.png',
                 'NBT_53_bars/D87.png',
-                'NBT_53_bars/D102.png',
-                'NBT_53_bars/D57.png',
-                'NBT_53_bars/D65.png',
-                'NBT_53_bars/D26.png'
+                'NBT_53_bars/D46.png',
+                'NBT_53_bars/D92.png'
             ]
         };
         timeline.push(preload);
@@ -116,7 +119,7 @@
             stimulus: 'Welcome to our experiment!' +
                 '<p> This experiment involves two parts: demographic information, followed by the experimental task.' +
                 '<p>At the bottom of this screen, you will see a button that says "Begin Experiment".' +
-                '<br>Please only click that button when you are ready to complete the 15 minute experiment in one sitting.</p>' +
+                '<br>Please only click that button when you are ready to complete the 30 minute experiment in one sitting.</p>' +
                 '<p> Once you click that button, it will not be possible to restart the experiment.',
             choices: ['Begin Experiment']
         }
@@ -311,6 +314,35 @@
             trial_duration: 500
         };
 
+        // Number of repetitions
+        const totalReps = 3;
+
+        // Loop through repetitions
+        for (let rep = 1; rep <= totalReps; rep++) {
+
+            console.log(`Starting repetition ${rep}`);
+
+            // Shuffle trials anew each repetition
+            let shuffledTrials = jsPsych.randomization.shuffle([...trials]);
+
+            // Add all trials (randomized) to timeline
+            timeline.push({
+                timeline: [iti, assign_trial],
+                timeline_variables: shuffledTrials.map(t => ({ ...t, repetition: rep })), // tag repetition
+                randomize_order: true
+            });
+
+            // Add a break *between* repetitions, not within them
+            if (rep < totalReps) {
+                timeline.push({
+                    type: jsPsychHtmlButtonResponse,
+                    stimulus: `<p>You have completed repetition ${rep} of ${totalReps} trial blocks.</p>
+                       <p>Take a short break if needed, then click below to continue.</p>`,
+                    choices: ['Continue']
+                });
+            }
+        }
+
         /*var break_trial = {
             type: jsPsychHtmlButtonResponse,
             stimulus: "<p>You have completed a block of trials. You can take a short break now. Press the button below when you are ready to continue.</p>",
@@ -325,7 +357,7 @@
 
         timeline.push(procedure);*/
 
-        // Function to create break trials
+        /*// Function to create break trials
         function makeBreakTrial(percentage) {
             return {
                 type: jsPsychHtmlButtonResponse,
@@ -369,7 +401,7 @@
             timeline: [iti, assign_trial],
             timeline_variables: lastBlock,
             randomize_order: true
-        });
+        });*/
 
         // Compute total number of assign trials added to the timeline and log it
         let totalAssignTrials = 0;
