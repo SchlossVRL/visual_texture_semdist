@@ -350,12 +350,14 @@
             });
 
             // Break message after first block
-            timeline.push({
-                type: jsPsychHtmlButtonResponse,
-                stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
-                   <p>Take a short break if needed, then click below to continue.</p>`,
-                choices: ['Continue']
-            });
+            if (blockCounter < totalBlocks) {
+                timeline.push({
+                    type: jsPsychHtmlButtonResponse,
+                    stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
+                <p>Take a short break if needed, then click below to continue.</p>`,
+                    choices: ['Continue']
+                });
+            }
             blockCounter++;
 
             // Add second block
@@ -366,12 +368,14 @@
             });
 
             // Break message after second block
-            timeline.push({
-                type: jsPsychHtmlButtonResponse,
-                stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
-                   <p>Take a short break if needed, then click below to continue.</p>`,
-                choices: ['Continue']
-            });
+            if (blockCounter < totalBlocks) {
+                timeline.push({
+                    type: jsPsychHtmlButtonResponse,
+                    stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
+                <p>Take a short break if needed, then click below to continue.</p>`,
+                    choices: ['Continue']
+                });
+            }
             blockCounter++;
         }
 
@@ -412,7 +416,7 @@
                 '<p>The goal of this experiment is to investigate what factors influence the way people interpret the meanings of textures. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
                 '<p>We are interested in understanding how the textures used in the bars affect which concepts people assign to each bar.</p>' +
                 '<p>Thank you for participating! Your credit will be updated on Sona within a few days.</p>' +
-                '<p><a href="https://fic.co/submissions/complete?cc=1652">Click here to complete the experiment/p>' +
+                '<p><a href="https://fic.co/submissions/complete?cc=1652">Click here to complete the experiment</a></p>' +
                 '</div>',
             choices: ['NO_KEYS']
         }
