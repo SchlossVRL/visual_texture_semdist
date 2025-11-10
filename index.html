@@ -44,7 +44,7 @@
             }
         });
 
-        let sona_id = jsPsych.data.urlVariables()['sona_id']
+        const sona_id = jsPsych.data.getURLVariable('id');
 
         // Add it to every trial's data
         jsPsych.data.addProperties({
