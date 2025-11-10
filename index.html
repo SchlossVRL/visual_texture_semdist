@@ -326,7 +326,7 @@
             trial_duration: 500
         };
 
-        const totalReps = 3;          // hidden repetitions
+        const totalReps = 1;          // hidden repetitions
         const blocksPerRep = 2;       // each repetition split into 2 blocks
         const totalBlocks = totalReps * blocksPerRep;
 
@@ -405,7 +405,7 @@
             action: "save",
             experiment_id: "rCYVwVfTK2SF",
             filename: filename,
-            message: "Please wait while the next page loads.",
+            wait_message: "Please wait while the next page loads.",
             data_string: () => jsPsych.data.get().csv()
         };
         timeline.push(save_data);
