@@ -173,6 +173,7 @@ var jsPsychBarChoice = (function (jspsych) {
         const trial_data = {
           rt: response.rt,
           key: response.key,
+          prompt: trial.prompt,
           chosen_side,
           correct_side: trial.correct_side,
           accuracy,
