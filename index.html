@@ -34,12 +34,21 @@
             return combinations;
         }
 
+
+
         //Initiate jsPsych
         var jsPsych = initJsPsych({
             on_finish: function () {
                 // Save data locally as CSV
                 jsPsych.data.get().localSave('csv', 'experiment_data.csv');
             }
+        });
+
+        let sona_id = jsPsych.data.urlVariables()['sona_id']
+
+        // Add it to every trial's data
+        jsPsych.data.addProperties({
+            sona_id: sona_id
         });
 
         /*
@@ -270,7 +279,7 @@
         //var n_trials = 5;
 
         // Number of repetitions per concept
-        var n_reps = 2; // you can adjust
+        //var n_reps = 2; // you can adjust
 
         // Shuffle the concept-side combos
         //concept_side_combos = jsPsych.randomization.shuffle(concept_side_combos);
@@ -314,7 +323,56 @@
             trial_duration: 500
         };
 
-        // Number of repetitions
+        const totalReps = 3;          // hidden repetitions
+        const blocksPerRep = 2;       // each repetition split into 2 blocks
+        const totalBlocks = totalReps * blocksPerRep;
+
+        let blockCounter = 1;         // global block counter for messages
+
+        for (let rep = 1; rep <= totalReps; rep++) {
+
+            // Shuffle trials for this repetition
+            let shuffledTrials = jsPsych.randomization.shuffle([...trials]);
+
+            // Split into 2 blocks
+            let half = Math.ceil(shuffledTrials.length / 2);
+            let firstHalf = shuffledTrials.slice(0, half);
+            let secondHalf = shuffledTrials.slice(half);
+
+            // Add first block
+            timeline.push({
+                timeline: [iti, assign_trial],
+                timeline_variables: firstHalf.map(t => ({ ...t })),
+                randomize_order: true
+            });
+
+            // Break message after first block
+            timeline.push({
+                type: jsPsychHtmlButtonResponse,
+                stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
+                   <p>Take a short break if needed, then click below to continue.</p>`,
+                choices: ['Continue']
+            });
+            blockCounter++;
+
+            // Add second block
+            timeline.push({
+                timeline: [iti, assign_trial],
+                timeline_variables: secondHalf.map(t => ({ ...t })),
+                randomize_order: true
+            });
+
+            // Break message after second block
+            timeline.push({
+                type: jsPsychHtmlButtonResponse,
+                stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
+                   <p>Take a short break if needed, then click below to continue.</p>`,
+                choices: ['Continue']
+            });
+            blockCounter++;
+        }
+
+        /*// Number of repetitions
         const totalReps = 3;
 
         // Loop through repetitions
@@ -341,7 +399,7 @@
                     choices: ['Continue']
                 });
             }
-        }
+        }*/
 
         /*var break_trial = {
             type: jsPsychHtmlButtonResponse,
@@ -439,7 +497,7 @@
                 '<p>The goal of this experiment is to investigate what factors influence the way people interpret the meanings of textures. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
                 '<p>We are interested in understanding how the textures used in the bars affect which concepts people assign to each bar.</p>' +
                 '<p>Thank you for participating! Your credit will be updated on Sona within a few days.</p>' +
-                '<p><a href="https://fic.co/submissions/complete?cc=XXXXXX">Click here to complete the experiment/p>' +
+                '<p><a href="https://fic.co/submissions/complete?cc="+sona_id>Click here to complete the experiment/p>' +
                 '</div>',
             choices: ['NO_KEYS']
         }
@@ -448,7 +506,12 @@
         console.log("Timeline contents:", timeline);
 
         //Run the experiment
-        jsPsych.run(timeline);
+        //jsPsych.run(timeline);
+        jsPsych.run(timeline).then(() => {
+            if (sona_id) {
+                window.location.href = `https://uwmadison.sona-systems.com/webstudy_credit.aspx?experiment_id=1652&cc=${sona_id}`;
+            }
+        });
     }
     startExperiment();
 
