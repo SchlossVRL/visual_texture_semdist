@@ -119,8 +119,11 @@
         };
         timeline.push(preload);
 
-        var participant_id = jsPsych.data.getURLVariable('participant_id') || Math.floor(Math.random() * 10000);
-        const filename = `participant_${participant_id}.csv`;
+        //var participant_id = jsPsych.data.getURLVariable('participant_id') || Math.floor(Math.random() * 10000);
+        //const filename = `participant_${participant_id}.csv`;
+
+        var participant_id = jsPsych.randomization.randomID(10);
+        const filename = `${subject_id}.csv`;
 
         // Initial welcome screen
         var initial_screen = {
@@ -372,94 +375,6 @@
             blockCounter++;
         }
 
-        /*// Number of repetitions
-        const totalReps = 3;
-
-        // Loop through repetitions
-        for (let rep = 1; rep <= totalReps; rep++) {
-
-            console.log(`Starting repetition ${rep}`);
-
-            // Shuffle trials anew each repetition
-            let shuffledTrials = jsPsych.randomization.shuffle([...trials]);
-
-            // Add all trials (randomized) to timeline
-            timeline.push({
-                timeline: [iti, assign_trial],
-                timeline_variables: shuffledTrials.map(t => ({ ...t, repetition: rep })), // tag repetition
-                randomize_order: true
-            });
-
-            // Add a break *between* repetitions, not within them
-            if (rep < totalReps) {
-                timeline.push({
-                    type: jsPsychHtmlButtonResponse,
-                    stimulus: `<p>You have completed repetition ${rep} of ${totalReps} trial blocks.</p>
-                       <p>Take a short break if needed, then click below to continue.</p>`,
-                    choices: ['Continue']
-                });
-            }
-        }*/
-
-        /*var break_trial = {
-            type: jsPsychHtmlButtonResponse,
-            stimulus: "<p>You have completed a block of trials. You can take a short break now. Press the button below when you are ready to continue.</p>",
-            choices: ['Continue']
-        };
-
-        var procedure = {
-            timeline: [iti, assign_trial],
-            timeline_variables: trials,
-            randomize_order: true
-        };
-
-        timeline.push(procedure);*/
-
-        /*// Function to create break trials
-        function makeBreakTrial(percentage) {
-            return {
-                type: jsPsychHtmlButtonResponse,
-                stimulus: `<p>You have completed ${percentage}% of the trials.</p>
-                   <p>Press the button below when you are ready to continue.</p>`,
-                choices: ['Continue']
-            };
-        }
-
-        // Make sure trial order is randomized
-        trials = jsPsych.randomization.shuffle(trials);
-
-        // Split trials into blocks with breaks at 25%, 50%, 75%
-        const totalTrials = trials.length;
-        const breakPoints = [
-            Math.floor(totalTrials * 0.25),
-            Math.floor(totalTrials * 0.50),
-            Math.floor(totalTrials * 0.75)
-        ];
-
-        for (let i = 0; i < breakPoints.length; i++) {
-            // slice trials for this block
-            let startIdx = i === 0 ? 0 : breakPoints[i - 1];
-            let endIdx = breakPoints[i];
-            let trialBlock = trials.slice(startIdx, endIdx);
-
-            // push trial block
-            timeline.push({
-                timeline: [iti, assign_trial],
-                timeline_variables: trialBlock,
-                randomize_order: true
-            });
-
-            // push break after this block
-            timeline.push(makeBreakTrial((i + 1) * 25));
-        }
-
-        // push remaining trials after the last break
-        let lastBlock = trials.slice(breakPoints[breakPoints.length - 1]);
-        timeline.push({
-            timeline: [iti, assign_trial],
-            timeline_variables: lastBlock,
-            randomize_order: true
-        });*/
 
         // Compute total number of assign trials added to the timeline and log it
         let totalAssignTrials = 0;
