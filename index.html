@@ -45,10 +45,13 @@
         });
 
         const sona_id = jsPsych.data.getURLVariable('id');
+        var participant_id = jsPsych.randomization.randomID(10);
+        const filename = `${participant_id}.csv`;
 
         // Add it to every trial's data
         jsPsych.data.addProperties({
-            sona_id: sona_id
+            sona_id: sona_id,
+            participant_id: participant_id
         });
 
         /*
@@ -121,9 +124,6 @@
 
         //var participant_id = jsPsych.data.getURLVariable('participant_id') || Math.floor(Math.random() * 10000);
         //const filename = `participant_${participant_id}.csv`;
-
-        var participant_id = jsPsych.randomization.randomID(10);
-        const filename = `${participant_id}.csv`;
 
         // Initial welcome screen
         var initial_screen = {
@@ -428,7 +428,7 @@
         //jsPsych.run(timeline);
         jsPsych.run(timeline).then(() => {
             if (sona_id) {
-                window.location.href = `https://uwmadison.sona-systems.com/webstudy_credit.aspx?experiment_id=1652&cc=${sona_id}`;
+                window.location.href = `https://uwmadison.sona-systems.com/webstudy_credit.aspx?experiment_id=1652&credit_token=ea076512702d447d87e368a354e37fd9&survey_code=` + sona_id;
             }
         });
     }
