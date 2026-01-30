@@ -77,16 +77,45 @@
 
         //correct for data pipe
         const texture_cond = {
-            "0": ['NBT_53_bars/D48.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D47.png',
-                'NBT_53_bars/D37.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D84.png'],
+            /*"0": ['NBT_53_bars/D48.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D47.png',
+                'NBT_53_bars/D37.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D84.png'],*/ //pilot
 
-            "1": ['NBT_53_bars/D77.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D51.png',
-                'NBT_53_bars/D19.png', 'NBT_53_bars/D87.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D92.png']
+            "0": ['NBT_53_bars/D103.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D18.png',
+                'NBT_53_bars/D101.png', 'NBT_53_bars/D1.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D94.png'],
+
+            "1": ['NBT_53_bars/D35.png', 'NBT_53_bars/D22.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D8.png',
+                'NBT_53_bars/D87.png', 'NBT_53_bars/D101.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D26.png'],
+
+            "2": ['NBT_53_bars/D52.png', 'NBT_53_bars/D16.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D8.png',
+                'NBT_53_bars/D64.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D48.png'],
+
+            "3": ['NBT_53_bars/D37.png', 'NBT_53_bars/D47.png', 'NBT_53_bars/D52.png', 'NBT_53_bars/D111.png',
+                'NBT_53_bars/D34.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D48.png'],
+
+            "4": ['NBT_53_bars/D4.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D84.png',
+                'NBT_53_bars/D11.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D102.png'],
+
+            "5": ['NBT_53_bars/D82.png', 'NBT_53_bars/D37.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D81.png',
+                'NBT_53_bars/D95.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D26.png'],
+
+            "6": ['NBT_53_bars/D34.png', 'NBT_53_bars/D82.png', 'NBT_53_bars/D66.png', 'NBT_53_bars/D36.png',
+                'NBT_53_bars/D92.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D77.png'],
+
+            "7": ['NBT_53_bars/D25.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D1.png',
+                'NBT_53_bars/D16.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D66.png']
+
         };
 
         const concept_cond = {
-            "0": ["field", "ocean"],
-            "1": ["lightning", "sandstorm"]
+            /*"0": ["field", "ocean"],*/ //pilot
+            "0": ["sleeping", "working"],
+            "1": ["fish", "lion"],
+            "2": ["far", "near"],
+            "3": ["field", "ocean"],
+            "4": ["drought", "lightning"],
+            "5": ["comfort", "reliability"],
+            "6": ["hurricane", "sandstorm"],
+            "7": ["safety", "speed"]
         };
 
         concept_list = concept_cond[condition_num];
@@ -97,27 +126,27 @@
         // Set background color to gray //
         document.body.style.backgroundColor = "rgb(128,128,128)"
 
+
         // Preload (if you have images, add them here)
         const preload = {
             type: jsPsychPreload,
             images: [
-                'img/instructions_graph.png',
-                'NBT_53_bars/D48.png',
-                'NBT_53_bars/D46.png',
-                'NBT_53_bars/D83.png',
-                'NBT_53_bars/D47.png',
-                'NBT_53_bars/D37.png',
-                'NBT_53_bars/D111.png',
-                'NBT_53_bars/D11.png',
-                'NBT_53_bars/D84.png',
-                'NBT_53_bars/D77.png',
-                'NBT_53_bars/D4.png',
-                'NBT_53_bars/D94.png',
-                'NBT_53_bars/D51.png',
-                'NBT_53_bars/D19.png',
-                'NBT_53_bars/D87.png',
-                'NBT_53_bars/D46.png',
-                'NBT_53_bars/D92.png'
+                'NBT_53_bars/D103.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D18.png',
+                'NBT_53_bars/D101.png', 'NBT_53_bars/D1.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D94.png',
+                'NBT_53_bars/D82.png', 'NBT_53_bars/D37.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D81.png',
+                'NBT_53_bars/D95.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D26.png',
+                'NBT_53_bars/D52.png', 'NBT_53_bars/D16.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D8.png',
+                'NBT_53_bars/D64.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D48.png',
+                'NBT_53_bars/D25.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D1.png',
+                'NBT_53_bars/D16.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D66.png',
+                'NBT_53_bars/D4.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D84.png',
+                'NBT_53_bars/D11.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D102.png',
+                'NBT_53_bars/D34.png', 'NBT_53_bars/D82.png', 'NBT_53_bars/D66.png', 'NBT_53_bars/D36.png',
+                'NBT_53_bars/D92.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D77.png',
+                'NBT_53_bars/D35.png', 'NBT_53_bars/D22.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D8.png',
+                'NBT_53_bars/D87.png', 'NBT_53_bars/D101.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D26.png',
+                'NBT_53_bars/D37.png', 'NBT_53_bars/D47.png', 'NBT_53_bars/D52.png', 'NBT_53_bars/D111.png',
+                'NBT_53_bars/D34.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D48.png'
             ]
         };
         timeline.push(preload);
