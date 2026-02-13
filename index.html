@@ -119,7 +119,6 @@
         };
 
         const concept_cond = {
-            /*"0": ["field", "ocean"],*/ //pilot
             "0": ["blueberry", "celery"],
             "1": ["field", "ocean"],
             "2": ["lightning", "sandstorm"],
@@ -457,7 +456,9 @@
             stimulus: '<div style="width:800px">Great job! You have finished the experiment.' +
                 '<p>The goal of this experiment is to investigate what factors influence the way people interpret the meanings of textures. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
                 '<p>We are interested in understanding how the textures used in the bars affect which concepts people assign to each bar.</p>' +
-                '<p>Thank you for participating! Your credit will be updated on Sona within a few days.</p>' +
+                '<p>Thank you for participating! We appreciate your time and effort in completing the study.</p>' +
+                '<p>Please copy and paste the completion code in Prolific to confirm that you have completed the study.</p>' +
+                '<p>The completion code is: C1K9KMK7 </p>' +
                 '<p>You may press the "esc" key to end the experiment and exit full screen.</p>' +
                 '</div>',
             choices: ['NO_KEYS']
@@ -467,12 +468,12 @@
         console.log("Timeline contents:", timeline);
 
         //Run the experiment
-        //jsPsych.run(timeline);
-        jsPsych.run(timeline).then(() => {
+        jsPsych.run(timeline);
+        /*jsPsych.run(timeline).then(() => {
             if (sona_id) {
                 window.location.href = `https://uwmadison.sona-systems.com/webstudy_credit.aspx?experiment_id=1652&credit_token=ea076512702d447d87e368a354e37fd9&survey_code=` + sona_id;
             }
-        });
+        });*/
     }
     startExperiment();
 
