@@ -61,11 +61,14 @@
         var participant_id = jsPsych.randomization.randomID(15);
         const filename = `${participant_id}.csv`;
 
+        const condition_num = await jsPsychPipe.getCondition("o7ihb2G0tTDO");
+
         jsPsych.data.addProperties({
             subject_id: subject_id,
             study_id: study_id,
             session_id: session_id,
-            participant_id: participant_id
+            participant_id: participant_id,
+            condition_num: condition_num
         });
 
 
@@ -73,13 +76,12 @@
         let timeline = [];
 
 
-        //const condition_num = await jsPsychPipe.getCondition("rCYVwVfTK2SF");
 
         // pilot 1: rCYVwVfTK2SF
         // pilot 2: ysyOlZ7oJr0v
         // pilot 3: o7ihb2G0tTDO
 
-        const condition_num = 7; //Default condition for one group
+        //const condition_num = 7; //Default condition for one group
 
 
         //correct for data pipe
@@ -384,6 +386,8 @@
             let firstHalf = shuffledTrials.slice(0, half);
             let secondHalf = shuffledTrials.slice(half);
 
+
+
             // Add first block
             timeline.push({
                 timeline: [iti, assign_trial],
@@ -396,11 +400,13 @@
                 timeline.push({
                     type: jsPsychHtmlButtonResponse,
                     stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
-                <p>Take a short break if needed, then click below to continue.</p>`,
+                            <p>Take a short break if needed, then click below to continue.</p>`,
                     choices: ['Continue']
                 });
             }
             blockCounter++;
+
+
 
             // Add second block
             timeline.push({
@@ -414,7 +420,7 @@
                 timeline.push({
                     type: jsPsychHtmlButtonResponse,
                     stimulus: `<p>You have completed block ${blockCounter} of ${totalBlocks}.</p>
-                <p>Take a short break if needed, then click below to continue.</p>`,
+                            <p>Take a short break if needed, then click below to continue.</p>`,
                     choices: ['Continue']
                 });
             }
@@ -429,6 +435,8 @@
                 totalAssignTrials += timeline[i].timeline_variables.length;
             }
         }
+
+
         console.log("Total assign trials in experiment:", totalAssignTrials);
 
         console.log("Participant ID:", participant_id);
@@ -459,7 +467,7 @@
                 '<p>We are interested in understanding how the textures used in the bars affect which concepts people assign to each bar.</p>' +
                 '<p>Thank you for participating! We appreciate your time and effort in completing the study.</p>' +
                 '<p>Please copy and paste the completion code in Prolific to confirm that you have completed the study.</p>' +
-                '<p>The completion code is: C1K9KMK7 </p>' +
+                '<p>The completion code is: <strong>C1K9KMK7</strong> </p>' +
                 '<p>You may press the "esc" key to end the experiment and exit full screen.</p>' +
                 '</div>',
             choices: ['NO_KEYS']
