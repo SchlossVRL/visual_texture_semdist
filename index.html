@@ -61,7 +61,7 @@
         var participant_id = jsPsych.randomization.randomID(15);
         const filename = `${participant_id}.csv`;
 
-        const condition_num = await jsPsychPipe.getCondition("o7ihb2G0tTDO");
+        const condition_num = await jsPsychPipe.getCondition("1jbBe679jhYH");
 
         jsPsych.data.addProperties({
             subject_id: subject_id,
@@ -454,7 +454,7 @@
         const save_data = {
             type: jsPsychPipe,
             action: "save",
-            experiment_id: "o7ihb2G0tTDO",
+            experiment_id: "1jbBe679jhYH",
             filename: filename,
             wait_message: "Please wait while the next page loads.",
             data_string: () => jsPsych.data.get().csv()
