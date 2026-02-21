@@ -61,7 +61,31 @@
         var participant_id = jsPsych.randomization.randomID(15);
         const filename = `${participant_id}.csv`;
 
-        const condition_num = await jsPsychPipe.getCondition("1jbBe679jhYH");
+        //const condition_num = await jsPsychPipe.getCondition("1jbBe679jhYH");
+
+
+        //Limit conditions run
+        let original_condition = await jsPsychPipe.getCondition("1jbBe679jhYH");
+        let condition_num = original_condition;
+
+        // Limit conditions run
+        if (condition_num <= 1) {
+            condition_num = 2;
+        } else if (condition_num <= 3) {
+            condition_num = 4;
+        } else if (condition_num <= 5) {
+            condition_num = 5;
+        } else {
+            condition_num = 6;
+        }
+
+        // Debug logs
+        console.log("Original condition from DataPipe:", original_condition);
+        console.log("Reassigned condition used in experiment:", condition_num);
+
+
+
+
 
         jsPsych.data.addProperties({
             subject_id: subject_id,
