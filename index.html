@@ -11,7 +11,6 @@
     <script src="jsPsych/jspsych.js"></script>
     <script src="jsPsych/plugin-html-button-response.js"></script>
     <script src="jsPsych/plugin-html-keyboard-response.js"></script>
-    <script src="jsPsych/assignment-inference_imageAC.js"></script>
     <script src="jsPsych/plugin-fullscreen.js"></script>
     <script src="jsPsych/plugin-survey-text.js"></script>
     <script src="jsPsych/plugin-survey-multi-select.js"></script>
@@ -452,12 +451,13 @@
             let firstHalf = shuffledTrials.slice(0, half);
             let secondHalf = shuffledTrials.slice(half);
 
-
-
             // Add first block
             timeline.push({
                 timeline: [iti, assign_trial],
-                timeline_variables: firstHalf.map(t => ({ ...t })),
+                timeline_variables: firstHalf.map(t => ({
+                    bar_images: [...t.bar_images],
+                    concepts:   [...t.concepts],
+                })),
                 randomize_order: true
             });
 
@@ -472,12 +472,13 @@
             }
             blockCounter++;
 
-
-
             // Add second block
             timeline.push({
                 timeline: [iti, assign_trial],
-                timeline_variables: secondHalf.map(t => ({ ...t })),
+                timeline_variables: secondHalf.map(t => ({
+                    bar_images: [...t.bar_images],
+                    concepts:   [...t.concepts],
+                })),
                 randomize_order: true
             });
 
@@ -491,8 +492,7 @@
                 });
             }
             blockCounter++;
-        }
-
+            }
 
         // Compute total number of assign trials added to the timeline and log it
         let totalAssignTrials = 0;

@@ -28,52 +28,39 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
     "use strict";
   
     const info = {
-    name: "assignment-inference-color-zh",
-    parameters: {
-        prompt: {
-          type: jspsych.ParameterType.HTML_STRING,
-          default: "",
+        name: "assignment-inference-color-zh",
+        parameters: {
+            prompt: {
+                type: jspsych.ParameterType.HTML_STRING,
+                default: "",
+            },
+            bar_images: {
+                type: jspsych.ParameterType.COMPLEX,  // change from STRING
+                array: true,
+                default: undefined,
+            },
+            concepts: {
+                type: jspsych.ParameterType.COMPLEX,  // change from STRING
+                array: true,
+                default: undefined,
+            },
+            bar_height: {
+                type: jspsych.ParameterType.INT,
+                default: 250,
+            },
+            bar_width: {
+                type: jspsych.ParameterType.INT,
+                default: 80,
+            },
+            bg_color: {
+                type: jspsych.ParameterType.STRING,
+                default: "rgb(128,128,128)",
+            },
+            instructions: {
+                type: jspsych.ParameterType.BOOL,
+                default: false,
+            },
         },
-        bar_images: {
-          type: jspsych.ParameterType.STRING,
-          array: true,
-          default: null,
-        },
-        bar_height: {
-          type: jspsych.ParameterType.INT,
-          array: true,
-          default: [200, 200, 200, 200, 200],
-        },
-        concepts: {
-          type: jspsych.ParameterType.STRING,
-          array: true,
-          default: null,
-        },
-        bar_width: {
-          type: jspsych.ParameterType.INT,
-          default: 120,
-        },
-        bg_color: {
-          type: jspsych.ParameterType.STRING,
-          default: "rgb(128,128,128)",
-        },
-        category: {
-          type: jspsych.ParameterType.STRING,
-          default: null,
-        },
-        repetition: {
-          type: jspsych.ParameterType.INT,
-          default: null,
-        },
-        condition_num: {
-          type: jspsych.ParameterType.INT,
-          default: null,
-        },
-        instructions: {
-          type: jspsych.ParameterType.BOOL,
-          default: false,
-        },
-      },
     };
   
     class AssignmentInferenceColorZHPlugin {
@@ -82,7 +69,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
       }
   
       trial(display_element, trial) {
-  
+
         const start_time = performance.now();
         const n = trial.concepts.length;
         let concept_tracker = [];
@@ -90,144 +77,149 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
         // ── Inject jQuery UI if not already present ──────────────
         // (assumes jQuery + jQuery UI are already loaded via your existing setup)
   
-        // ── Build bar columns HTML ────────────────────────────────
-        let bar_cols_html = '';
-        for (let i = 0; i < n; i++) {
-          bar_cols_html += `
-            <div class="bid-column" style="
-              display:inline-block;
-              vertical-align:bottom;
-              margin:0 8px;
-              text-align:center;
-            ">
-              <!-- Textured bar -->
-              <div style="
+// ── Build bar columns HTML ──
+let bar_cols_html = '';
+for (let i = 0; i < n; i++) {
+    bar_cols_html += `
+        <div class="bid-column" style="
+            display:inline-block;
+            vertical-align:bottom;
+            margin:0 8px;
+            text-align:center;
+        ">
+            <div style="
                 width:${trial.bar_width}px;
-                height:${trial.bar_height[i]}px;
+                height:${trial.bar_height}px;
                 background-image:url('${trial.bar_images[i]}');
                 background-size:cover;
                 background-position:center;
                 border:2px solid #333;
                 box-sizing:border-box;
-              "></div>
-  
-              <!-- Drop slot directly below bar -->
-              <div class="concept-receiver" data-index="${i}" style="
-                width:${trial.bar_width}px;
-                height:55px;
-                background:#595959;
-                border:2px dashed #aaa;
-                border-top:none;
-                line-height:55px;
-                text-align:center;
-                display:inline-block;
-                position:relative;
-                box-sizing:border-box;
-              ">
-                <p style="
-                  color:#595959;
-                  font-size:16px;
-                  text-align:center;
-                  margin:0;
-                ">____</p>
-              </div>
-            </div>`;
-        }
-  
-        // ── Build concept bank HTML ────────────────────────────────
-        let bank_html = '';
-        for (let i = 0; i < n; i++) {
-          bank_html += `
-            <div class="concept-option" style="
-              color:black;
-              display:inline-block;
-              width:120px;
-              height:50px;
-              background:#595959;
-              margin:5px;
-              border:1px solid black;
-              cursor:grab;
-              line-height:50px;
-              font-size:18px;
-              text-align:center;
-            ">
-              <p style="z-index:3;margin:0;">${trial.concepts.length[i]}</p>
-            </div>`;
-        }
-  
-        // ── Optional instruction preamble ─────────────────────────
-        const preamble = trial.instructions ? `
-          <p style="text-align:left;max-width:820px;margin:0 auto 12px auto;font-size:15px;">
-            You will see 5 textured bars. A bank of concept labels appears above them.
-            <strong>Drag</strong> each label into the slot below the bar you think it best represents.
-            Use <em>Reset labels</em> to start over. <strong>Done</strong> becomes clickable
-            when all five slots are filled.
-          </p>` : '';
-  
-        // ── Full display HTML ──────────────────────────────────────
-        display_element.innerHTML = `
-          <div id="bid-wrapper" style="
+            "></div>
+        </div>`;
+}
+
+// ── Build concept bank HTML ──
+let bank_html = '';
+for (let i = 0; i < n; i++) {
+    bank_html += `
+        <div class="concept-option" style="
+            color:black;
+            display:inline-block;
+            width:120px;
+            height:50px;
+            background:#595959;
+            margin:5px;
+            border:1px solid black;
+            cursor:grab;
+            line-height:50px;
+            font-size:18px;
             text-align:center;
-            padding:20px;
-            background:${trial.bg_color};
-            min-height:100vh;
-          ">
-            ${preamble}
-  
-            <!-- Prompt -->
-            <div style="font-size:22px;margin-bottom:14px;">
-              ${trial.prompt}
-            </div>
-  
-            <!-- Concept bank -->
-            <div id="bid-bank" style="
-              background:#595959;
-              padding:10px;
-              margin:0 auto 12px auto;
-              min-height:70px;
-              display:inline-block;
-              min-width:700px;
-              border:1px dashed #999;
-            ">
-              ${bank_html}
-            </div>
-            <br>
-  
-            <!-- Reset / Submit buttons -->
-            <div style="width:760px;margin:0 auto 16px auto;overflow:hidden;">
-              <button id="bid-reset" style="
+        ">
+            <p style="z-index:3;margin:0;">${trial.concepts[i]}</p>
+        </div>`;
+}
+
+// ── Full display HTML ──
+display_element.innerHTML = `
+    <div id="bid-wrapper" style="
+        text-align:center;
+        padding:20px;
+        background:${trial.bg_color};
+        min-height:100vh;
+    ">
+        <!-- Prompt -->
+        <div style="font-size:22px;margin-bottom:14px;">
+            ${trial.prompt}
+        </div>
+
+        <!-- Concept bank -->
+        <div id="bid-bank" style="
+            background:#595959;
+            padding:10px;
+            margin:0 auto 12px auto;
+            min-height:70px;
+            display:inline-block;
+            min-width:700px;
+            border:1px dashed #999;
+        ">
+            ${bank_html}
+        </div>
+        <br>
+
+        <!-- Reset / Submit buttons -->
+        <div style="width:760px;margin:0 auto 16px auto;overflow:hidden;">
+            <button id="bid-reset" style="
                 float:left;height:40px;
                 background:#ddd;border:1px solid #ccc;
                 border-radius:5px;padding:0 16px;
                 cursor:pointer;font-size:14px;
-              ">Reset labels</button>
-  
-              <button id="bid-submit" disabled style="
+            ">Reset labels</button>
+
+            <button id="bid-submit" disabled style="
                 float:right;height:40px;
                 border-radius:5px;padding:0 20px;
                 font-size:14px;cursor:not-allowed;
                 opacity:0.4;border:1px solid #ccc;
-              ">Submit</button>
-              <div style="clear:both;"></div>
-            </div>
-  
-            <!-- Bars + slots -->
+            ">Submit</button>
+            <div style="clear:both;"></div>
+        </div>
+
+ <!-- Chart + slots wrapper, all centered -->
+        <div style="display:inline-block; text-align:center;">
+
+            <!-- Bars sitting on x-axis -->
             <div id="bid-bars" style="
-              display:inline-block;
-              background:#595959;
-              padding:16px 20px 0 20px;
-              vertical-align:bottom;
-              border-left:2px solid #333;
-              border-bottom:2px solid #333;
+                display:inline-flex;
+                align-items:flex-end;
+                background:#595959;
+                padding:16px 20px 0 20px;
+                border-left:2px solid #333;
+                border-bottom:2px solid #333;
             ">
-              ${bar_cols_html}
+                ${bar_cols_html}
             </div>
+
+            <!-- Drop slots below axis with padding -->
+            <div id="bid-slots" style="
+                display:flex;
+                justify-content:center;
+                margin-top:16px;
+                padding:0 20px;
+            ">
+                ${Array.from({length: n}, (_, i) => `
+                    <div style="
+                        display:inline-block;
+                        margin:0 8px;
+                        text-align:center;
+                    ">
+                        <div class="concept-receiver" data-index="${i}" style="
+                            width:${trial.bar_width}px;
+                            height:55px;
+                            background:#595959;
+                            border:2px dashed #aaa;
+                            line-height:55px;
+                            text-align:center;
+                            display:inline-block;
+                            position:relative;
+                            box-sizing:border-box;
+                        ">
+                            <p style="
+                                color:#595959;
+                                font-size:16px;
+                                text-align:center;
+                                margin:0;
+                            ">____</p>
+                        </div>
+                    </div>`).join('')}
+            </div>
+
+        </div>
+
+    </div>`;
   
-          </div>`;
   
-  
-        // ── jQuery UI drag/drop ────────────────────────────────────
-        // (zoom-corrected to match your original plugin exactly)
+        // ── jQuery UI drag/drop ──
         const zoomScale = 1;
   
         function makeDraggable($p) {
@@ -333,7 +325,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
                 margin:5px;border:1px solid black;cursor:grab;
                 line-height:50px;font-size:18px;text-align:center;
               ">
-                <p style="z-index:3;margin:0;">${trial.concepts.length[i]}</p>
+                <p style="z-index:3;margin:0;">${trial.concepts[i]}</p>
               </div>`);
           }
           makeDraggable($(".concept-option").find("p"));
@@ -362,9 +354,9 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
   
           const trial_data = {
             rt:               rt,
-            label_options:    JSON.stringify(trial.concepts.length),
+            label_options:    JSON.stringify(trial.concepts),
             bar_images:       JSON.stringify(trial.bar_images),
-            bar_height:      JSON.stringify(trial.bar_height),
+            bar_height:       JSON.stringify(trial.bar_height),
             label_responses:  JSON.stringify(responses),  // index 0 = leftmost bar
             category:         JSON.stringify(trial.category),
             repetition:       JSON.stringify(trial.repetition),
