@@ -44,10 +44,12 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
                 array: true,
                 default: undefined,
             },
+            /*
             bar_height: {
                 type: jspsych.ParameterType.INT,
                 default: 250,
             },
+            */
             bar_width: {
                 type: jspsych.ParameterType.INT,
                 default: 80,
@@ -72,6 +74,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
         const start_time = performance.now();
         const n = trial.concepts.length;
+        const bar_heights = [200, 225, 250, 275, 300].sort(() => Math.random() - 0.5);
         let concept_tracker = [];
   
 // (assumes jQuery + jQuery UI are already loaded via your existing setup)
@@ -88,7 +91,7 @@ for (let i = 0; i < n; i++) {
         ">
             <div style="
                 width:${trial.bar_width}px;
-                height:${trial.bar_height}px;
+                height:${bar_heights[i]}px;
                 background-image:url('${trial.bar_images[i]}');
                 background-size:cover;
                 background-position:center;
