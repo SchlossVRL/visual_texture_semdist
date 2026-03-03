@@ -26,8 +26,8 @@
 <body></body>
 <script>
     async function startExperiment() {
-        //Start jsPsych Experiment!!!
 
+        //Start jsPsych Experiment!!!
         function generateDirectionalPairs(pairs) {
             const combinations = [];
             for (let i = 0; i < pairs.length; i++) {
@@ -39,9 +39,7 @@
             return combinations;
         }
 
-
-
-        //Initiate jsPsych
+        //--INITIATE JSPSYCH--//
         var jsPsych = initJsPsych({
             on_finish: function () {
                 // Save data locally as CSV
@@ -59,7 +57,7 @@
             participant_id: participant_id
         });*/
 
-
+        // -- PARTICIPANT AND SESSION IDS -- //
         var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
         var study_id = jsPsych.data.getURLVariable('STUDY_ID');
         var session_id = jsPsych.data.getURLVariable('SESSION_ID');
@@ -67,7 +65,6 @@
         const filename = `${participant_id}.csv`;
 
         //const condition_num = await jsPsychPipe.getCondition("1jbBe679jhYH");
-
 
         //Limit conditions run
         //let original_condition = await jsPsychPipe.getCondition("1jbBe679jhYH");
@@ -84,20 +81,15 @@
             condition_num = 7;
         } */
 
-
         // manually set condition to finish filling bins
         //const condition_num = 8;
         const condition_num = "8"; // string instead of number
-
 
         // Debug logs
         //console.log("Original condition from DataPipe:", original_condition);
         console.log("Reassigned condition used in experiment:", condition_num);
 
-
-
-
-
+        // Add these IDs to every trial's saved data
         jsPsych.data.addProperties({
             subject_id: subject_id,
             study_id: study_id,
@@ -106,18 +98,13 @@
             condition_num: condition_num
         });
 
-
         //Create timeline
         let timeline = [];
-
-
 
         // pilot 1: rCYVwVfTK2SF
         // pilot 2: ysyOlZ7oJr0v
         // pilot 3: o7ihb2G0tTDO
         // Prolific: 1jbBe679jhYH
-
-
 
         //correct for data pipe
         const texture_cond = {
@@ -167,7 +154,7 @@
             "5": ["disgust", "happy"],
             "6": ["far", "near"],
             "7": ["fish", "lion"],
-            "8": ["Halle", "Karen", "Anna", "Zoe", "Jojo Siwa"]
+            "8": ["Halle", "Karen", "Anna", "Zoe"]
         };
 
         let concept_list = concept_cond[condition_num];
@@ -177,7 +164,6 @@
 
         // Set background color to gray //
         document.body.style.backgroundColor = "rgb(128,128,128)"
-
 
         // Preload (if you have images, add them here)
         const preload = {
@@ -206,6 +192,7 @@
         //var participant_id = jsPsych.data.getURLVariable('participant_id') || Math.floor(Math.random() * 10000);
         //const filename = `participant_${participant_id}.csv`;
 
+        // -- DO THE CONSENT AND DEMO STUFF -- //
         // Initial welcome screen
         var initial_screen = {
             type: jsPsychHtmlButtonResponse,
@@ -295,29 +282,114 @@
 
         timeline.push(demo_completion);
 
-
-
+        // -- BEGIN THE EXPERIMENT -- //
         //Instructions for the experiment
         var instructions = {
             type: jsPsychHtmlButtonResponse,
             stimulus: `
-                <div style=text-align:left;>
-                <p>In this experiment you will be asked to imagine you are interpreting bar graphs representing data about the concepts, <b>${concept_list[0]}</b> and <b>${concept_list[1]}</b>.</p> 
-                <p>On each trial there will be text at the top of the screen indicating the target concept to judge (<b>${concept_list[0]}</b> or <b>${concept_list[1]}</b>).</p> 
-                <p>Below, there will be a chart with five bars, like the one below. Your task is to report which data point you think represents the target concept (<b>${concept_list[0]}</b> or <b>${concept_list[1]}</b>).</p> 
-                <p>The bars will not be labeled, so please use your intuition about which bar represents the target concept (<b>${concept_list[0]}</b> or <b>${concept_list[1]}</b>).</p> 
-                <p style='text-align:center; font-weight:bold;'>[TARGET CONCEPT]</p> 
-                <img src='img/instructions_graph.png' style= 'margin-right:auto;margin-left:auto;width:20%;display:block'></img> 
-                <p>If you think the LEFT bar represents the target concept, press the LEFT ARROW KEY.</p> 
-                <p>If you think the RIGHT bar represents the target concept, press the RIGHT ARROW KEY.</p> 
-                <p>After you respond there will be a pause and then the next trial will begin.</p> 
-                <p>The experiment will take about 30 minutes, and there will be 6 blocks of trials. You will be notified when you have completed each block. Press 'Continue' when you are ready to begin.<br></p> 
-                </div>
-                `,
+                <div style="text-align:left; max-width:1100px; margin:0 auto;">
+                    <p>In this experiment you will see a bar chart with
+                    ${concept_list.length} bars. You will be asked to imagine you are
+                    interpreting the bar chart representing data about the concepts:
+                    <b>${concept_list.join('</b>, <b>')}</b>.</p>
+                    <p>Above the chart there will be a bank of concept labels. Drag and
+                    drop each label into the dashed slot below the bar you think best
+                    represents it. Use the <b>Reset labels</b> button to start over, and the
+                    <b>Submit</b> button to confirm your answers.</p>
+
+                    <!-- experiment demo -->
+                    <div style="text-align:center; margin:10px auto;">
+
+                    <!-- concept bank -->
+                    <div style="
+                        background:#808080;
+                        padding:8px;
+                        display:inline-block;
+                        border:1px dashed #999;
+                        margin-bottom:10px;
+                    ">
+                        ${concept_list.map(c => `
+                            <div style="
+                                color:black;
+                                display:block;
+                                width:100px;
+                                height:36px;
+                                background:#808080;
+                                border:1px solid black;
+                                line-height:36px;
+                                font-size:14px;
+                                text-align:center;
+                                margin:4px auto;
+                            ">${c}</div>
+                        `).join('')}
+                    </div>
+
+                        <br>
+
+                    <!-- bars and slots -->
+                    <div style="display:inline-block; text-align:center;">
+
+                        <!-- bars -->
+                            <div style="
+                                display:inline-flex;
+                                align-items:flex-end;
+                                background:#808080;
+                                padding:10px 16px 0 16px;
+                                border-left:2px solid #333;
+                                border-bottom:2px solid #333;
+                            ">
+                                ${[160, 200, 140, 180, 120]
+                                    .slice(0, concept_list.length)
+                                    .map((h, i) => `
+                                    <div style="margin:0 6px; vertical-align:bottom;">
+                                        <div style="
+                                            width:70px;
+                                            height:${h}px;
+                                            background:hsl(0, 0%, ${40 + i * 10}%);
+                                            border:2px solid #333;
+                                            box-sizing:border-box;
+                                        "></div>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                        <!-- slots below bars -->
+                            <div style="
+                                display:flex;
+                                justify-content:center;
+                                margin-top:10px;
+                            ">
+                                ${concept_list.map(() => `
+                                    <div style="margin:0 6px;">
+                                        <div style="
+                                            width:70px;
+                                            height:44px;
+                                            background:#808080;
+                                            border:2px dashed #aaa;
+                                            line-height:44px;
+                                            text-align:center;
+                                            box-sizing:border-box;
+                                            font-size:13px;
+                                            color:#aaa;
+                                        ">____</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <p>After you respond there will be a short pause, then the next
+                    trial will begin. The experiment will take about 30 minutes and
+                    there will be 6 blocks of trials. You will be notified when you
+                    complete each block.</p>
+                    <p>Please press <b>Continue</b> when you are ready to begin.</p>
+
+                </div>`,
+
             choices: ['Continue']
         };
         timeline.push(instructions);
-
 
         // heights
         var heights = {
@@ -325,7 +397,7 @@
             "tall": [250, 250]
         };
 
-        //all ordered color pairs (no repeats)
+        //all ordered texture pairs (no repeats)
         function getTexturePairs(textures) {
             var pairs = [];
             for (var i = 0; i < textures.length; i++) {
@@ -335,7 +407,7 @@
                     }
                 }
             }
-            return pairs; // e.g., [ [red, blue], [blue, red], ... ]
+            return pairs;
         }
 
         //all height pairs (no repeats/duplicates)
@@ -403,7 +475,7 @@
         };
         */
 
-    // Each trial = one full assignment of 5 concepts to 5 bars
+    // Each trial = assignment of 4 concepts to 4 bars
         var trials = [];
         const n_reps = 5;
 
@@ -413,19 +485,20 @@
             concepts:   jsPsych.randomization.shuffle([...concept_list]),
         });
         }
+
         console.log("concept_list at trial build time:", concept_list);
         console.log("texture_list at trial build time:", texture_list);
         console.log("trials[0]:", trials[0]);
         console.log("trials[0].concepts:", trials[0].concepts);
 
         var assign_trial = {
-        type: jsPsychAssignmentInferenceColorZH,
-        bar_images: jsPsych.timelineVariable('bar_images'),
-        concepts: jsPsych.timelineVariable('concepts'),
-        //bar_height: 250,
-        bar_width: 80,
-        bg_color: "rgb(128,128,128)",
-        prompt: "Drag each concept to the bar you think best represents it.",
+            type: jsPsychAssignmentInferenceColorZH,
+            bar_images: jsPsych.timelineVariable('bar_images'),
+            concepts: jsPsych.timelineVariable('concepts'),
+            //bar_height: 250,
+            bar_width: 80,
+            bg_color: "rgb(128,128,128)",
+            prompt: "Drag each concept to the bar you think best represents it.",
         };     
 
         var iti = {
@@ -435,11 +508,11 @@
             trial_duration: 500
         };
 
-        const totalReps = 3;          // hidden repetitions
-        const blocksPerRep = 2;       // each repetition split into 2 blocks
+        const totalReps = 3; // hidden repetitions
+        const blocksPerRep = 2; // each repetition split into 2 blocks
         const totalBlocks = totalReps * blocksPerRep;
 
-        let blockCounter = 1;         // global block counter for messages
+        let blockCounter = 1; // global block counter for messages
 
         for (let rep = 1; rep <= totalReps; rep++) {
 
@@ -502,9 +575,7 @@
             }
         }
 
-
         console.log("Total assign trials in experiment:", totalAssignTrials);
-
         console.log("Participant ID:", participant_id);
         console.log("Assigned condition number:", condition_num);
         console.log("Assigned concepts:", concept_list);

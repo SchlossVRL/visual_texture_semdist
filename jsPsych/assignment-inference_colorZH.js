@@ -1,11 +1,11 @@
 /*
-Assignment inference task: 5 textured bars, drag-and-drop concept labels
+Assignment inference task: 4 textured bars, drag-and-drop concept labels
 
 Parameters:
 - prompt          = instruction text shown above the chart
-- bar_images      = array of 5 image paths (textures)
-- bar_height     = array of 5 heights in px
-- label_options   = array of 5 concept strings
+- bar_images      = array of 4 image paths (textures)
+- bar_height     = array of 4 heights in px
+- label_options   = array of 4 concept strings
 - bar_width       = width of each bar in px (default 120)
 - bg_color        = background color
 - category        = concept category label (saved to data)
@@ -15,10 +15,10 @@ Parameters:
 
 Data saved:
 - rt              = reaction time from trial start to submit click (NO)
-- label_options   = the 5 concepts shown (JSON) (YES)
-- bar_images      = the 5 texture paths in display order (JSON) (YES)
-- bar_height     = the 5 bar heights in display order (JSON) (YES)
-- label_responses = the 5 assigned concepts in bar order, index 0 = leftmost (JSON) (YES)
+- label_options   = the 4 concepts shown (JSON) (YES)
+- bar_images      = the 4 texture paths in display order (JSON) (YES)
+- bar_height     = the 4 bar heights in display order (JSON) (YES)
+- label_responses = the 4 assigned concepts in bar order, index 0 = leftmost (JSON) (YES)
 - category        = as above
 - repetition      = as above
 - condition_num   = as above
@@ -88,11 +88,11 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
             const start_time = performance.now();
 
-            //mumber of bars/concepts (should be 5 for now)
+            //mumber of bars/concepts (should be 4 for now)
             const n = trial.concepts.length;
 
-            //bar heights: shuffle [200,225,250,275,300] then apply + or - 5px jitter
-            const bar_heights = [200, 225, 250, 275, 300]
+            //bar heights: shuffle [175,200,225,250] then apply + or - 5px jitter
+            const bar_heights = [175, 200, 225, 250]
                 .sort(() => Math.random() - 0.5)
                 .map(h => h + Math.floor(Math.random() * 11) - 5);
 
@@ -120,7 +120,6 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
                             background-image:url('${trial.bar_images[i]}');
                             background-size:cover;
                             background-position:center;
-                            border:2px solid #333;
                             box-sizing:border-box;
                         "></div>
                     </div>`;
