@@ -108,14 +108,6 @@
 
         //correct for data pipe
         const texture_cond = {
-            /*"0": ['NBT_53_bars/D48.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D47.png',
-                'NBT_53_bars/D37.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D84.png'],*/ //pilot field ocean
-
-            /*"2": ['NBT_53_bars/D52.png', 'NBT_53_bars/D16.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D8.png',
-                'NBT_53_bars/D64.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D48.png'],*/ //pilot near far
-
-            /*"6": ['NBT_53_bars/D34.png', 'NBT_53_bars/D82.png', 'NBT_53_bars/D66.png', 'NBT_53_bars/D36.png',
-                'NBT_53_bars/D92.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D77.png'],*/ // pilot hurricane sandstorm
 
             "0": ['NBT_53_bars/D26.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D48.png',
                 'NBT_53_bars/D105.png', 'NBT_53_bars/D101.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D57.png'],
@@ -146,15 +138,20 @@
         };
 
         const concept_cond = {
-            "0": ["blueberry", "celery"],
-            "1": ["field", "ocean"],
-            "2": ["lightning", "sandstorm"],
-            "3": ["sleeping", "working"],
-            "4": ["carrot", "strawberry"],
-            "5": ["disgust", "happy"],
-            "6": ["far", "near"],
-            "7": ["fish", "lion"],
-            "8": ["Halle", "Karen", "Anna", "Zoe"]
+            "0": ["Pants", "Shoes", "Dress", "Shirt"],
+            "1": ["Eggplant", "Corn", "Celery", "Carrot"],
+            "2": ["Hurricane", "Sandstorm", "Blizzard", "Lightning"],
+            "3": ["Peace", "Greed", "Evil", "Love"],
+            "4": ["Working", "Leisure", "Eating", "Sleeping"],
+            "5": ["Efficiency", "Comfort", "Speed", "Reliability"],
+            "6": ["Strawberry", "Watermelon", "Blueberry", "Mango"],
+            "7": ["Ocean", "Sky", "Field", "Beach"],
+            "8": ["Disgust", "Angry", "Sad", "Happy"],
+            "9": ["Beside", "Above", "Below", "Far"],
+            "10": ["Noon", "Dusk", "Day", "Night"], 
+            "11": ["Fish", "Bird", "Bear", "Lion"],
+            "12": ["Airplane", "Boat", "Truck", "Train"], 
+            "13": ["Grape", "Banana", "Peach", "Cherry"]     
         };
 
         let concept_list = concept_cond[condition_num];
@@ -345,7 +342,7 @@
                                         <div style="
                                             width:70px;
                                             height:${h}px;
-                                            background:hsl(0, 0%, ${40 + i * 10}%);
+                                            background:#808080;
                                             border:2px solid #333;
                                             box-sizing:border-box;
                                         "></div>
