@@ -74,7 +74,9 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
         const start_time = performance.now();
         const n = trial.concepts.length;
-        const bar_heights = [200, 225, 250, 275, 300].sort(() => Math.random() - 0.5);
+        const bar_heights = [200, 225, 250, 275, 300]
+            .sort(() => Math.random() - 0.5)
+            .map(h => h + Math.floor(Math.random() * 11) - 5);
         let concept_tracker = [];
   
 // (assumes jQuery + jQuery UI are already loaded via your existing setup)
