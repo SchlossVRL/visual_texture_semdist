@@ -104,11 +104,11 @@ for (let i = 0; i < n; i++) {
     bank_html += `
         <div class="concept-option" style="
             color:black;
-            display:inline-block;
+            display:block;
             width:120px;
             height:50px;
             background:#808080;
-            margin:5px;
+            margin:5px auto;
             border:1px solid black;
             cursor:grab;
             line-height:50px;
@@ -139,8 +139,9 @@ display_element.innerHTML = `
             margin:0 auto 12px auto;
             min-height:70px;
             display:inline-block;
-            min-width:700px;
+            width:140px;
             border:1px dashed #999;
+            vertical-align:top;
         ">
             ${bank_html}
         </div>
