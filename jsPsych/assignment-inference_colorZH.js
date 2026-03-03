@@ -74,8 +74,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
         const n = trial.concepts.length;
         let concept_tracker = [];
   
-        // ── Inject jQuery UI if not already present ──────────────
-        // (assumes jQuery + jQuery UI are already loaded via your existing setup)
+// (assumes jQuery + jQuery UI are already loaded via your existing setup)
   
 // ── Build bar columns HTML ──
 let bar_cols_html = '';
@@ -108,7 +107,7 @@ for (let i = 0; i < n; i++) {
             display:inline-block;
             width:120px;
             height:50px;
-            background:#595959;
+            background:#808080;
             margin:5px;
             border:1px solid black;
             cursor:grab;
@@ -135,7 +134,7 @@ display_element.innerHTML = `
 
         <!-- Concept bank -->
         <div id="bid-bank" style="
-            background:#595959;
+            background:#808080;
             padding:10px;
             margin:0 auto 12px auto;
             min-height:70px;
@@ -165,22 +164,22 @@ display_element.innerHTML = `
             <div style="clear:both;"></div>
         </div>
 
- <!-- Chart + slots wrapper, all centered -->
-        <div style="display:inline-block; text-align:center;">
+        <!-- Chart + slots wrapper, all centered -->
+                <div style="display:inline-block; text-align:center;">
 
-            <!-- Bars sitting on x-axis -->
-            <div id="bid-bars" style="
-                display:inline-flex;
-                align-items:flex-end;
-                background:#595959;
-                padding:16px 20px 0 20px;
-                border-left:2px solid #333;
-                border-bottom:2px solid #333;
-            ">
-                ${bar_cols_html}
-            </div>
+                    <!-- Bars sitting on x-axis -->
+                    <div id="bid-bars" style="
+                        display:inline-flex;
+                        align-items:flex-end;
+                        background:#808080;
+                        padding:16px 20px 0 20px;
+                        border-left:2px solid #333;
+                        border-bottom:2px solid #333;
+                    ">
+                        ${bar_cols_html}
+                    </div>
 
-            <!-- Drop slots below axis with padding -->
+        <!-- Drop slots below axis with padding -->
             <div id="bid-slots" style="
                 display:flex;
                 justify-content:center;
@@ -196,7 +195,7 @@ display_element.innerHTML = `
                         <div class="concept-receiver" data-index="${i}" style="
                             width:${trial.bar_width}px;
                             height:55px;
-                            background:#595959;
+                            background:#808080;
                             border:2px dashed #aaa;
                             line-height:55px;
                             text-align:center;
@@ -205,7 +204,7 @@ display_element.innerHTML = `
                             box-sizing:border-box;
                         ">
                             <p style="
-                                color:#595959;
+                                color:#808080;
                                 font-size:16px;
                                 text-align:center;
                                 margin:0;
@@ -217,7 +216,6 @@ display_element.innerHTML = `
         </div>
 
     </div>`;
-  
   
         // ── jQuery UI drag/drop ──
         const zoomScale = 1;
@@ -306,7 +304,7 @@ display_element.innerHTML = `
         bindDroppable();
   
   
-        // ── Reset button ────────────────────────────────────────────
+        // ── Reset button ──
         $("#bid-reset").on("click", function () {
           concept_tracker = [];
   
@@ -321,7 +319,7 @@ display_element.innerHTML = `
             $("#bid-bank").append(`
               <div class="concept-option" style="
                 color:black;display:inline-block;
-                width:120px;height:50px;background:#595959;
+                width:120px;height:50px;background:#808080;
                 margin:5px;border:1px solid black;cursor:grab;
                 line-height:50px;font-size:18px;text-align:center;
               ">
@@ -332,7 +330,7 @@ display_element.innerHTML = `
   
           // Clear all slots
           $(".concept-receiver")
-            .html('<p style="color:#595959;font-size:16px;text-align:center;margin:0;">____</p>')
+            .html('<p style="color:#808080;font-size:16px;text-align:center;margin:0;">____</p>')
             .droppable("enable");
   
           // Re-bind droppable (fresh handlers)
@@ -340,7 +338,7 @@ display_element.innerHTML = `
         });
   
   
-        // ── Submit button ───────────────────────────────────────────
+        // ── Submit button ──
         $("#bid-submit").on("click", function () {
           if ($(this).prop("disabled")) return;
   
@@ -357,7 +355,7 @@ display_element.innerHTML = `
             label_options:    JSON.stringify(trial.concepts),
             bar_images:       JSON.stringify(trial.bar_images),
             bar_height:       JSON.stringify(trial.bar_height),
-            label_responses:  JSON.stringify(responses),  // index 0 = leftmost bar
+            label_responses:  JSON.stringify(responses),  // index 0 = left bar
             category:         JSON.stringify(trial.category),
             repetition:       JSON.stringify(trial.repetition),
             condition_num:    JSON.stringify(trial.condition_num),
