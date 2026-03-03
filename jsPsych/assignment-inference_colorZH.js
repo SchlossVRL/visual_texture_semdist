@@ -14,11 +14,11 @@ Parameters:
 - instructions    = if true, show instruction preamble
 
 Data saved:
-- rt              = reaction time from trial start to submit click
-- label_options   = the 5 concepts shown (JSON)
-- bar_images      = the 5 texture paths in display order (JSON)
-- bar_height     = the 5 bar heights in display order (JSON)
-- label_responses = the 5 assigned concepts in bar order, index 0 = leftmost (JSON)
+- rt              = reaction time from trial start to submit click (NO)
+- label_options   = the 5 concepts shown (JSON) (YES)
+- bar_images      = the 5 texture paths in display order (JSON) (YES)
+- bar_height     = the 5 bar heights in display order (JSON) (YES)
+- label_responses = the 5 assigned concepts in bar order, index 0 = leftmost (JSON) (YES)
 - category        = as above
 - repetition      = as above
 - condition_num   = as above
