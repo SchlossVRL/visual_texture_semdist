@@ -59,6 +59,13 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
                 default: 80,
             },
 
+            //the bar heights are specified in the index file
+            bar_heights: {
+                type: jspsych.ParameterType.COMPLEX,
+                array: true,
+                default: undefined,
+            },
+
             //background color of the whole trial screen
             bg_color: {
                 type: jspsych.ParameterType.STRING,
