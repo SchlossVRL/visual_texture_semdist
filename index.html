@@ -268,7 +268,7 @@
         }
         timeline.push(age_lang_demo);
 
-        // Consent and demo Completion
+        //consent and demo Completion
         var demo_completion = {
             type: jsPsychHtmlButtonResponse,
             stimulus: "<p>Great job!</p> You have completed the consent process and answered the demographic questions." +
@@ -279,7 +279,7 @@
         timeline.push(demo_completion);
 
         // -- BEGIN THE EXPERIMENT -- //
-        //Instructions for the experiment
+        //instructions with the fake experiment trial built in
         var instructions = {
             type: jsPsychHtmlButtonResponse,
             stimulus: `
@@ -466,27 +466,16 @@
             [2, 3, 0, 1,   1, 0, 3, 2],
             [3, 0, 1, 2,   0, 3, 2, 1],
         ];
-        //latinSquare[barPosition][blockIndex] = texture index
 
         const totalBlocks = 8;
 
-        //shuffle all the 14 conditions once — same order for all blocks
+        //shuffle all the 14 conditions once 
         //const all_conditions = jsPsych.randomization.shuffle(Object.keys(concept_cond));
 
         //sets conditions but I don't need to shuffle them because they are randomized in the blocks later using latin square
         const all_conditions = Object.keys(concept_cond);
 
         for (let blockIndex = 0; blockIndex < totalBlocks; blockIndex++) {
-
-            /*
-            //intro screen before each block
-            timeline.push({
-                type: jsPsychHtmlButtonResponse,
-                stimulus: `<p>Block ${blockIndex + 1} of ${totalBlocks}</p>
-                        <p>Click <b>Continue</b> when ready.</p>`,
-                choices: ['Continue']
-            });
-            */
 
             //conditions are shuffled so order is random within each block
             let blockTrials = jsPsych.randomization.shuffle(all_conditions).map(condition_num => {
@@ -502,14 +491,14 @@
                     texture_list[ latinSquare[3][blockIndex] ],
                 ];
 
-                //shuffles the heights [200,225,250,275] with ±5px jitter
+                //shuffles the heights [200,225,250,275] with + or - 5px jitter
                 const bar_heights = jsPsych.randomization.shuffle([175, 200, 225, 250])
                     .map(h => h + Math.floor(Math.random() * 11) - 5);
 
                 return { bar_images, concepts: concept_list, bar_heights, condition_num };
             });
 
-            //pushes whatever block's trials to timeline
+            //pushes whatever block its on's trials to timeline
             timeline.push({
                 timeline: [iti, assign_trial],
                 timeline_variables: blockTrials,
