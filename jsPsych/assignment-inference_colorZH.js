@@ -91,7 +91,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
         trial(display_element, trial) {
 
-            // -- Trial setup --
+            // -- trial setup --
 
             const start_time = performance.now();
 
@@ -111,7 +111,6 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
 
             // -- Build bar columns HTML --
-            //each column is a texture iage on the x-axis
             let bar_cols_html = '';
             for (let i = 0; i < n; i++) {
                 bar_cols_html += `
@@ -134,7 +133,6 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
 
             // -- Build concept bank HTML --
-            //vertical stack of concept labels that Pp drags
             let bank_html = '';
             for (let i = 0; i < n; i++) {
                 bank_html += `
@@ -157,7 +155,7 @@ var jsPsychAssignmentInferenceColorZH = (function (jspsych) {
 
 
             // -- Build drop slots HTML --
-            //one slot per bar, placement is below x axis
+            //one slot per bar and the placement is below x axis
             const slots_html = Array.from({length: n}, (_, i) => `
                 <div style="
                     display:inline-block;
