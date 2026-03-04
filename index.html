@@ -167,22 +167,20 @@
         const preload = {
             type: jsPsychPreload,
             images: [
-                'NBT_53_bars/D26.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D48.png',
-                'NBT_53_bars/D105.png', 'NBT_53_bars/D101.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D57.png',
-                'NBT_53_bars/D85.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D48.png',
-                'NBT_53_bars/D8.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D111.png',
-                'NBT_53_bars/D20.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D83.png',
-                'NBT_53_bars/D87.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D68.png',
-                'NBT_53_bars/D94.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D77.png', 'NBT_53_bars/D96.png',
-                'NBT_53_bars/D79.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D37.png',
-                'NBT_53_bars/D49.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D25.png',
-                'NBT_53_bars/D102.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D76.png',
-                'NBT_53_bars/D82.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D55.png',
-                'NBT_53_bars/D64.png', 'NBT_53_bars/D87.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D74.png',
-                'NBT_53_bars/D64.png', 'NBT_53_bars/D52.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D25.png',
-                'NBT_53_bars/D11.png', 'NBT_53_bars/D53.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D77.png',
-                'NBT_53_bars/D26.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D96.png', 'NBT_53_bars/D22.png',
-                'NBT_53_bars/D35.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D34.png'
+                'NBT_53_bars/D8.png', 'NBT_53_bars/D16.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D4.png',
+                'NBT_53_bars/D37.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D1.png', 'NBT_53_bars/D16.png',
+                'NBT_53_bars/D75.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D57.png',
+                'NBT_53_bars/D111.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D81.png', 'NBT_53_bars/D49.png',
+                'NBT_53_bars/D74.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D77.png', 'NBT_53_bars/D95.png',
+                'NBT_53_bars/D16.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D8.png',
+                'NBT_53_bars/D48.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D85.png',
+                'NBT_53_bars/D74.png', 'NBT_53_bars/D85.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D34.png',
+                'NBT_53_bars/D18.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D64.png', 'NBT_53_bars/D68.png',
+                'NBT_53_bars/D87.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D77.png',
+                'NBT_53_bars/D26.png', 'NBT_53_bars/D53.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D65.png',
+                'NBT_53_bars/D68.png', 'NBT_53_bars/D20.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D49.png',
+                'NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D4.png',
+                'NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png'
             ]
         };
         timeline.push(preload);
@@ -473,7 +471,10 @@
         const totalBlocks = 8;
 
         //shuffle all the 14 conditions once — same order for all blocks
-        const all_conditions = jsPsych.randomization.shuffle(Object.keys(concept_cond));
+        //const all_conditions = jsPsych.randomization.shuffle(Object.keys(concept_cond));
+
+        //sets conditions but I don't need to shuffle them because they are randomized in the blocks later using latin square
+        const all_conditions = Object.keys(concept_cond);
 
         for (let blockIndex = 0; blockIndex < totalBlocks; blockIndex++) {
 
