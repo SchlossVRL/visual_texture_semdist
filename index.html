@@ -83,11 +83,11 @@
 
         // manually set condition to finish filling bins
         //const condition_num = 8;
-        const condition_num = "8"; // string instead of number
+        //const condition_num = "8"; // string instead of number
 
         // Debug logs
         //console.log("Original condition from DataPipe:", original_condition);
-        console.log("Reassigned condition used in experiment:", condition_num);
+        //console.log("Reassigned condition used in experiment:", condition_num);
 
         // Add these IDs to every trial's saved data
         jsPsych.data.addProperties({
@@ -95,7 +95,7 @@
             study_id: study_id,
             session_id: session_id,
             participant_id: participant_id,
-            condition_num: condition_num
+            //condition_num: condition_num
         });
 
         //Create timeline
@@ -109,31 +109,33 @@
         //correct for data pipe
         const texture_cond = {
 
-            "0": ['NBT_53_bars/D26.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D48.png',
-                'NBT_53_bars/D105.png', 'NBT_53_bars/D101.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D57.png'],
+            "0": ['NBT_53_bars/D8.png', 'NBT_53_bars/D16.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D4.png'],
 
-            "1": ['NBT_53_bars/D85.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D56.png', 'NBT_53_bars/D48.png',
-                'NBT_53_bars/D8.png', 'NBT_53_bars/D11.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D111.png'],
+            "1": ['NBT_53_bars/D37.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D1.png', 'NBT_53_bars/D16.png'],
 
-            "2": ['NBT_53_bars/D20.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D92.png', 'NBT_53_bars/D83.png',
-                'NBT_53_bars/D87.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D57.png', 'NBT_53_bars/D68.png'],
+            "2": ['NBT_53_bars/D75.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D57.png'],
 
-            "3": ['NBT_53_bars/D94.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D77.png', 'NBT_53_bars/D96.png',
-                'NBT_53_bars/D79.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D83.png', 'NBT_53_bars/D37.png'],
+            "3": ['NBT_53_bars/D111.png', 'NBT_53_bars/D95.png', 'NBT_53_bars/D81.png', 'NBT_53_bars/D49.png'],
 
-            "4": ['NBT_53_bars/D49.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D25.png',
-                'NBT_53_bars/D102.png', 'NBT_53_bars/D105.png', 'NBT_53_bars/D51.png', 'NBT_53_bars/D76.png'],
+            "4": ['NBT_53_bars/D74.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D77.png', 'NBT_53_bars/D95.png'],
 
-            "5": ['NBT_53_bars/D82.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D17.png', 'NBT_53_bars/D55.png',
-                'NBT_53_bars/D64.png', 'NBT_53_bars/D87.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D74.png'],
+            "5": ['NBT_53_bars/D16.png', 'NBT_53_bars/D34.png', 'NBT_53_bars/D94.png', 'NBT_53_bars/D8.png'],
 
-            "6": ['NBT_53_bars/D64.png', 'NBT_53_bars/D52.png', 'NBT_53_bars/D48.png', 'NBT_53_bars/D25.png',
-                'NBT_53_bars/D11.png', 'NBT_53_bars/D53.png', 'NBT_53_bars/D49.png', 'NBT_53_bars/D77.png'],
+            "6": ['NBT_53_bars/D48.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D8.png', 'NBT_53_bars/D85.png'],
 
-            "7": ['NBT_53_bars/D26.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D96.png', 'NBT_53_bars/D22.png',
-                'NBT_53_bars/D35.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D34.png'],
+            "7": ['NBT_53_bars/D74.png', 'NBT_53_bars/D85.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D34.png'],
 
-            "8": ['NBT_53_bars/D26.png', 'NBT_53_bars/D4.png', 'NBT_53_bars/D96.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D34.png']
+            "8": ['NBT_53_bars/D18.png', 'NBT_53_bars/D75.png', 'NBT_53_bars/D64.png', 'NBT_53_bars/D68.png'],
+
+            "9": ['NBT_53_bars/D87.png', 'NBT_53_bars/D46.png', 'NBT_53_bars/D25.png', 'NBT_53_bars/D77.png'],
+
+            "10": ['NBT_53_bars/D26.png', 'NBT_53_bars/D53.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D65.png'],
+
+            "11": ['NBT_53_bars/D68.png', 'NBT_53_bars/D20.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D49.png'],
+
+            "12": ['NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D4.png'],
+
+            "13": ['NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png']
 
         };
 
@@ -154,10 +156,9 @@
             "13": ["Grape", "Banana", "Peach", "Cherry"]     
         };
 
-        let concept_list = concept_cond[condition_num];
-        concept_list = jsPsych.randomization.shuffle(concept_list);
-
-        let texture_list = texture_cond[condition_num];
+        //let concept_list = concept_cond[condition_num];
+        //concept_list = jsPsych.randomization.shuffle(concept_list);
+        //let texture_list = texture_cond[condition_num];
 
         // Set background color to gray //
         document.body.style.backgroundColor = "rgb(128,128,128)"
@@ -284,110 +285,75 @@
         var instructions = {
             type: jsPsychHtmlButtonResponse,
             stimulus: `
-                <div style="text-align:left; max-width:1100px; margin:0 auto;">
-                    <p>In this experiment you will see a bar chart with
-                    ${concept_list.length} bars. You will be asked to imagine you are
-                    interpreting the bar chart representing data about the concepts:
-                    <b>${concept_list.join('</b>, <b>')}</b>.</p>
-                    <p>Above the chart there will be a bank of concept labels. Drag and
-                    drop each label into the dashed slot below the bar you think best
-                    represents it. Use the <b>Reset labels</b> button to start over, and the
-                    <b>Submit</b> button to confirm your answers.</p>
+                <div style="text-align:left; max-width:1200px; margin:0 auto;">
+                    <p>In this experiment you will see a series of bar charts containing 4 bars each, like the one below.</p>
+                    <p>A bank of concept labels will appear above each chart. Using your mouse, please drag and
+                    drop each concept into the dashed slot below the bar you think best
+                    represents it. Click the <b>Reset labels</b> button to start over, and
+                    the <b>Submit</b> button to submit your answers.</p>
 
-                    <!-- experiment demo -->
                     <div style="text-align:center; margin:10px auto;">
 
-                    <!-- concept bank -->
-                    <div style="
-                        background:#808080;
-                        padding:8px;
-                        display:inline-block;
-                        border:1px dashed #999;
-                        margin-bottom:10px;
-                    ">
-                        ${concept_list.map(c => `
-                            <div style="
-                                color:black;
-                                display:block;
-                                width:100px;
-                                height:36px;
-                                background:#808080;
-                                border:1px solid black;
-                                line-height:36px;
-                                font-size:14px;
-                                text-align:center;
-                                margin:4px auto;
-                            ">${c}</div>
-                        `).join('')}
-                    </div>
-
+                        <!-- Concept bank -->
+                        <div style="
+                            background:#808080; padding:8px;
+                            display:inline-block; border:1px dashed #999;
+                            margin-bottom:10px;
+                        ">
+                            ${['Concept A','Concept B','Concept C','Concept D'].map(c => `
+                                <div style="
+                                    color:black; display:block; width:100px; height:36px;
+                                    background:#ccc; border:1px solid black;
+                                    line-height:36px; font-size:14px;
+                                    text-align:center; margin:4px auto;
+                                ">${c}</div>
+                            `).join('')}
+                        </div>
                         <br>
 
-                    <!-- bars and slots -->
-                    <div style="display:inline-block; text-align:center;">
+                        <!-- Chart and slots -->
+                        <div style="display:inline-block; text-align:center;">
 
-                        <!-- bars -->
                             <div style="
-                                display:inline-flex;
-                                align-items:flex-end;
-                                background:#808080;
-                                padding:10px 16px 0 16px;
-                                border-left:2px solid #333;
-                                border-bottom:2px solid #333;
+                                display:inline-flex; align-items:flex-end;
+                                background:#808080; padding:10px 16px 0 16px;
+                                border-left:2px solid #333; border-bottom:2px solid #333;
                             ">
-                                ${[160, 200, 140, 180, 120]
-                                    .slice(0, concept_list.length)
-                                    .map((h, i) => `
-                                    <div style="margin:0 6px; vertical-align:bottom;">
+                                ${[160, 200, 140, 180].map((h, i) => `
+                                    <div style="margin:0 6px;">
                                         <div style="
-                                            width:70px;
-                                            height:${h}px;
+                                            width:70px; height:${h}px;
                                             background:#808080;
-                                            border:2px solid #333;
-                                            box-sizing:border-box;
+                                            border:2px solid #333; box-sizing:border-box;
                                         "></div>
                                     </div>
                                 `).join('')}
                             </div>
 
-                        <!-- slots below bars -->
-                            <div style="
-                                display:flex;
-                                justify-content:center;
-                                margin-top:10px;
-                            ">
-                                ${concept_list.map(() => `
+                            <div style="display:flex; justify-content:center; margin-top:10px;">
+                                ${[0,1,2,3].map(() => `
                                     <div style="margin:0 6px;">
                                         <div style="
-                                            width:70px;
-                                            height:44px;
-                                            background:#808080;
-                                            border:2px dashed #aaa;
-                                            line-height:44px;
-                                            text-align:center;
-                                            box-sizing:border-box;
-                                            font-size:13px;
-                                            color:#aaa;
+                                            width:70px; height:44px; background:#808080;
+                                            border:2px dashed #aaa; line-height:44px;
+                                            text-align:center; box-sizing:border-box;
+                                            font-size:13px; color:#aaa;
                                         ">____</div>
                                     </div>
                                 `).join('')}
                             </div>
-
                         </div>
                     </div>
 
-                    <p>After you respond there will be a short pause, then the next
-                    trial will begin. The experiment will take about 30 minutes and
-                    there will be 6 blocks of trials. You will be notified when you
-                    complete each block.</p>
+                    <p>Before each new set you will see a screen showing the upcoming concepts.</p>
+                    <p>After you respond there will be a short pause, then the next trial will begin. The experiment will take about 30 minutes and there will be 6 blocks of trials.</p>
                     <p>Please press <b>Continue</b> when you are ready to begin.</p>
-
                 </div>`,
-
             choices: ['Continue']
         };
         timeline.push(instructions);
 
+        /*
         // heights
         var heights = {
             "short": [200, 200],
@@ -420,14 +386,17 @@
             }
             return pairs;
         }
+        */
 
-        var texture_pairs = getTexturePairs(texture_list);
-        var height_pairs = getHeightPairs(heights);
+        //var texture_pairs = getTexturePairs(texture_list);
+        //var height_pairs = getHeightPairs(heights);
 
+        /*
         // Function to randomly pick an element from array
         function sample(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         }
+        */
 
         // Number of trials
         //var n_trials = 5;
@@ -472,7 +441,21 @@
         };
         */
 
-    // Each trial = assignment of 4 concepts to 4 bars
+        const all_conditions = jsPsych.randomization.shuffle(Object.keys(concept_cond));
+        for (const condition_num of all_conditions) {
+            let concept_list = jsPsych.randomization.shuffle([...concept_cond[condition_num]]);
+            let texture_list = texture_cond[condition_num];
+
+            //upcoming concepts??
+            timeline.push({
+                type: jsPsychHtmlButtonResponse,
+                stimulus: `<p>Next set of concepts:</p>
+                        <p><b>${concept_list.join('</b>, <b>')}</b></p>
+                        <p>Click <b>Continue</b> when ready.</p>`,
+                choices: ['Continue']
+            });
+    
+        // Each trial = assignment of 4 concepts to 4 bars
         var trials = [];
         const n_reps = 5;
 
@@ -562,7 +545,8 @@
                 });
             }
             blockCounter++;
-            }
+            } // end rep loop
+        } // end condition loop
 
         // Compute total number of assign trials added to the timeline and log it
         let totalAssignTrials = 0;
@@ -572,16 +556,7 @@
             }
         }
 
-        console.log("Total assign trials in experiment:", totalAssignTrials);
         console.log("Participant ID:", participant_id);
-        console.log("Assigned condition number:", condition_num);
-        console.log("Assigned concepts:", concept_list);
-        console.log("condition_num:", condition_num);
-        console.log("concept_cond:", concept_cond);
-        console.log("condition_num:", condition_num);
-        console.log("typeof condition_num:", typeof condition_num);
-        console.log("direct lookup:", concept_cond["8"]);
-        console.log("variable lookup:", concept_cond[condition_num]);
 
         //Exit fullscreen
         timeline.push({
