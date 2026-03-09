@@ -105,6 +105,7 @@
         // pilot 2: ysyOlZ7oJr0v
         // pilot 3: o7ihb2G0tTDO
         // Prolific: 1jbBe679jhYH
+        //4s lab pilot and testing: LYeRWKvt6wtY
 
         //correct for data pipe
         const texture_cond = {
@@ -135,25 +136,28 @@
 
             "12": ['NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D4.png'],
 
-            "13": ['NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png']
+            "13": ['NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png'],
+
+            "14": ['img/triangle.png', 'img/square.png', 'img/circle.png', 'img/star.png'] // practice textures/check trials
 
         };
 
         const concept_cond = {
-            "0": ["Pants", "Shoes", "Dress", "Shirt"],
-            "1": ["Eggplant", "Corn", "Celery", "Carrot"],
-            "2": ["Hurricane", "Sandstorm", "Blizzard", "Lightning"],
-            "3": ["Peace", "Greed", "Evil", "Love"],
-            "4": ["Working", "Leisure", "Eating", "Sleeping"],
-            "5": ["Efficiency", "Comfort", "Speed", "Reliability"],
-            "6": ["Strawberry", "Watermelon", "Blueberry", "Mango"],
-            "7": ["Ocean", "Sky", "Field", "Beach"],
-            "8": ["Disgust", "Angry", "Sad", "Happy"],
-            "9": ["Beside", "Above", "Below", "Far"],
-            "10": ["Noon", "Dusk", "Day", "Night"], 
-            "11": ["Fish", "Bird", "Bear", "Lion"],
-            "12": ["Airplane", "Boat", "Truck", "Train"], 
-            "13": ["Grape", "Banana", "Peach", "Cherry"]     
+            "0": ["pants", "shoes", "dress", "shirt"],
+            "1": ["eggplant", "corn", "celery", "carrot"],
+            "2": ["hurricane", "sandstorm", "blizzard", "lightning"],
+            "3": ["peace", "greed", "evil", "love"],
+            "4": ["working", "leisure", "eating", "sleeping"],
+            "5": ["efficiency", "comfort", "speed", "reliability"],
+            "6": ["strawberry", "watermelon", "blueberry", "mango"],
+            "7": ["ocean", "sky", "field", "beach"],
+            "8": ["disgust", "angry", "sad", "happy"],
+            "9": ["beside", "above", "below", "far"],
+            "10": ["noon", "dusk", "day", "night"],
+            "11": ["fish", "bird", "bear", "lion"],
+            "12": ["airplane", "boat", "truck", "train"],
+            "13": ["grape", "banana", "peach", "cherry"],
+            "14": ["square", "circle", "triangle", "star"] // practice concepts/check trials
         };
 
         //let concept_list = concept_cond[condition_num];
@@ -180,7 +184,8 @@
                 'NBT_53_bars/D26.png', 'NBT_53_bars/D53.png', 'NBT_53_bars/D84.png', 'NBT_53_bars/D65.png',
                 'NBT_53_bars/D68.png', 'NBT_53_bars/D20.png', 'NBT_53_bars/D35.png', 'NBT_53_bars/D49.png',
                 'NBT_53_bars/D77.png', 'NBT_53_bars/D111.png', 'NBT_53_bars/D26.png', 'NBT_53_bars/D4.png',
-                'NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png'
+                'NBT_53_bars/D105.png', 'NBT_53_bars/D102.png', 'NBT_53_bars/D74.png', 'NBT_53_bars/D57.png',
+                'img/triangle.png', 'img/square.png', 'img/circle.png', 'img/star.png'
             ]
         };
         timeline.push(preload);
@@ -297,7 +302,7 @@
                             display:inline-block; border:1px dashed #999;
                             margin-bottom:10px;
                         ">
-                            ${['Concept A','Concept B','Concept C','Concept D'].map(c => `
+                            ${['Concept A', 'Concept B', 'Concept C', 'Concept D'].map(c => `
                                 <div style="
                                     color:black; display:block; width:100px; height:36px;
                                     background:#ccc; border:1px solid black;
@@ -328,7 +333,7 @@
                             </div>
 
                             <div style="display:flex; justify-content:center; margin-top:10px;">
-                                ${[0,1,2,3].map(() => `
+                                ${[0, 1, 2, 3].map(() => `
                                     <div style="margin:0 6px;">
                                         <div style="
                                             width:70px; height:44px; background:#808080;
@@ -345,7 +350,7 @@
                     <p>Click the <b>Reset labels</b> button to start over, and, once you are finished with your responses, click the <b>Submit</b> button to submit your answers.
                         Each bar must have at least one concept underneath it in order to move onto the next trial.</p>
                     <p>After you respond there will be a short pause, then the next trial will begin. The experiment will take about 30 minutes and there will be 8 blocks of trials.</p>
-                    <p>Please press <b>Continue</b> when you are ready to begin.</p>
+                    <p>Please press <b>Continue</b> to try a practice trial.</p>
                 </div>`,
             choices: ['Continue']
         };
@@ -438,6 +443,28 @@
             response_ends_trial: true
         };
         */
+
+        var practice_trial = {
+            type: jsPsychAssignmentInferenceColorZH,
+            bar_images: ['img/triangle.png', 'img/square.png', 'img/circle.png', 'img/star.png'],
+            concepts: jsPsych.randomization.shuffle(["square", "circle", "triangle", "star"]),
+            bar_width: 80,
+            bg_color: "rgb(128,128,128)",
+            prompt: "Drag each concept to the bar you think best represents it.",
+        };
+
+        timeline.push(practice_trial);
+
+        practice_end = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: "<p>Great job! You have completed the practice trial.</p>" +
+                "<p>Click the button to continue to the main experiment.</p>",
+            choices: ['Continue']
+        };
+
+        timeline.push(practice_end);
+
+
         var iti = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: '<div style="font-size: 40px;">+</div>',
@@ -446,12 +473,12 @@
         };
 
         var assign_trial = {
-            type:       jsPsychAssignmentInferenceColorZH,
+            type: jsPsychAssignmentInferenceColorZH,
             bar_images: jsPsych.timelineVariable('bar_images'),
-            concepts:   jsPsych.timelineVariable('concepts'),
-            bar_width:  80,
-            bg_color:   "rgb(128,128,128)",
-            prompt:     "Drag each concept to the bar you think best represents it.",
+            concepts: jsPsych.timelineVariable('concepts'),
+            bar_width: 80,
+            bg_color: "rgb(128,128,128)",
+            prompt: "Drag each concept to the bar you think best represents it.",
         };
 
         // -- LATIN SQUARE --
@@ -461,10 +488,10 @@
 
         //the rows is the bar positions (1-4), the columns is the blocks (1-8)
         const latinSquare = [
-            [0, 1, 2, 3,   3, 2, 1, 0],
-            [1, 2, 3, 0,   2, 1, 0, 3],
-            [2, 3, 0, 1,   1, 0, 3, 2],
-            [3, 0, 1, 2,   0, 3, 2, 1],
+            [0, 1, 2, 3, 3, 2, 1, 0],
+            [1, 2, 3, 0, 2, 1, 0, 3],
+            [2, 3, 0, 1, 1, 0, 3, 2],
+            [3, 0, 1, 2, 0, 3, 2, 1],
         ];
 
         const totalBlocks = 8;
@@ -485,10 +512,10 @@
 
                 //assigns textures to the bar positions using the latin square for whatever block it is
                 const bar_images = [
-                    texture_list[ latinSquare[0][blockIndex] ],
-                    texture_list[ latinSquare[1][blockIndex] ],
-                    texture_list[ latinSquare[2][blockIndex] ],
-                    texture_list[ latinSquare[3][blockIndex] ],
+                    texture_list[latinSquare[0][blockIndex]],
+                    texture_list[latinSquare[1][blockIndex]],
+                    texture_list[latinSquare[2][blockIndex]],
+                    texture_list[latinSquare[3][blockIndex]],
                 ];
 
                 //shuffles the heights [200,225,250,275] with + or - 5px jitter
@@ -536,7 +563,7 @@
         const save_data = {
             type: jsPsychPipe,
             action: "save",
-            experiment_id: "1jbBe679jhYH",
+            experiment_id: "LYeRWKvt6wtY",
             filename: filename,
             wait_message: "Please wait while the next page loads.",
             data_string: () => jsPsych.data.get().csv()
