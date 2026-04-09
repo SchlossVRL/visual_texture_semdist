@@ -47,6 +47,8 @@
             }
         });
 
+        /*
+        // -- PARTICIPANT AND SESSION IDS -- // SONA
         const sona_id = jsPsych.data.getURLVariable('id');
         var participant_id = jsPsych.randomization.randomID(15);
         const filename = `${participant_id}.csv`;
@@ -55,9 +57,8 @@
         jsPsych.data.addProperties({
             sona_id: sona_id,
             participant_id: participant_id
-        });
+        });*/
 
-        /*
 
         // -- PARTICIPANT AND SESSION IDS -- // PROLIFIC
         var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
@@ -67,6 +68,8 @@
         const filename = `${participant_id}.csv`;
 
 
+
+        /*
         //const condition_num = await jsPsychPipe.getCondition("1jbBe679jhYH");
 
         //Limit conditions run
@@ -92,7 +95,7 @@
         //console.log("Original condition from DataPipe:", original_condition);
         //console.log("Reassigned condition used in experiment:", condition_num);
 
-        /*
+
         // Add these IDs to every trial's saved data - PROLIFIC
         jsPsych.data.addProperties({
             subject_id: subject_id,
@@ -100,7 +103,7 @@
             session_id: session_id,
             participant_id: participant_id,
             //condition_num: condition_num
-        });*/
+        });
 
         //Create timeline
         let timeline = [];
@@ -111,6 +114,7 @@
         // Prolific: 1jbBe679jhYH
         //4s lab pilot and testing: LYeRWKvt6wtY
         //4s final SONA: FQCVmkIvUDB2
+        //4s Prolific: 7qqOqCG00Cpr
 
         //correct for data pipe
         const texture_cond = {
@@ -217,6 +221,7 @@
         })
 
 
+        /*
         //Consent signing - SONA
         var consentSign = {
             type: jsPsychSurveyMultiSelect,
@@ -261,11 +266,11 @@
             ],
             button_label: "Start Experiment",
         };
-        timeline.push(consentSign);
+        timeline.push(consentSign);*/
 
 
 
-        /*
+
         //Consent signing - PROLIFIC 
         var consentSign = {
             type: jsPsychSurveyMultiSelect,
@@ -311,7 +316,7 @@
             ],
             button_label: "Start Experiment",
         };
-        timeline.push(consentSign);*/
+        timeline.push(consentSign);
 
         // Demographic questions
         var age_lang_demo = {
@@ -619,13 +624,15 @@
         const save_data = {
             type: jsPsychPipe,
             action: "save",
-            experiment_id: "FQCVmkIvUDB2",
+            experiment_id: "7qqOqCG00Cpr",
             filename: filename,
             wait_message: "Please wait while the next page loads.",
             data_string: () => jsPsych.data.get().csv()
         };
         timeline.push(save_data);
 
+
+        /*
         // Debrief - SONA
         var debrief_script = {
             type: jsPsychHtmlKeyboardResponse,
@@ -637,10 +644,10 @@
                 '</div>',
             choices: ['NO_KEYS']
         }
-        timeline.push(debrief_script);
+        timeline.push(debrief_script);*/
 
         // Debrief - PROLIFIC
-        /*var debrief_script = {
+        var debrief_script = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: '<div style="width:800px">Great job! You have finished the experiment.' +
                 '<p>The goal of this experiment is to investigate what factors influence the way people interpret the meanings of textures. In a series of trials, you indicated which textured bars best correspond to concepts from a given list.</p>' +
@@ -652,7 +659,7 @@
                 '</div>',
             choices: ['NO_KEYS']
         }
-        timeline.push(debrief_script);*/
+        timeline.push(debrief_script);
 
         console.log("Timeline contents:", timeline);
 
